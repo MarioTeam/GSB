@@ -19,9 +19,10 @@ switch($action){
 		$dateValid = $annee . $mois;
                 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($user,$dateValid);
 		$listeUtilisateur = $pdo->getNomPrenomIdVisiteur();
+                $nbJustificatifs = $pdo->getNbjustificatifs($user,$dateValid);
                 $lesFraisForfait= $pdo->getLesFraisForfait($user,$dateValid);
 		$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($user,$dateValid);
-		 $montantValide = $lesInfosFicheFrais['montantValide'];
+		$montantValide = $lesInfosFicheFrais['montantValide'];
                 include("vues/v_listeVisiteur.php");
 		include ("vues/v_validFrais.php");
 		break;
