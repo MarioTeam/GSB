@@ -91,7 +91,7 @@
  
 		
 	<p class="titre"></p>
-        <p> Nombre de Justificatif : <input type="text" value="<?php echo $nbJustificatifs ?>" style="width:25px;" /></p>
+        <span>Nb justificatif : </span><?php echo $nbJustificatifs ?>
 	<p class="titre" /><label class="titre">&nbsp;</label><input class="zone"type="reset" /><input class="zone"type="submit" />
         
         
