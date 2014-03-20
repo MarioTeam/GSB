@@ -1,40 +1,99 @@
 <form name="formValidFrais" method="post" action="enregValidFrais.php">
-				
-		
-	<p class="titre" />
-	<center><h2>Frais au forfait </h2></center>
-	<?php echo $dateValid ?>
-	<table border="1">
-		<tr><th>Repas midi</th><th>Nuitée </th><th>Etape</th><th>Km </th><th>Situation</th></tr>
-		<tr align="center"><td width="80" ><input type="text" size="3" name="repas"/></td>
-			<td width="80"><input type="text" size="3" name="nuitee"/></td> 
-			<td width="80"> <input type="text" size="3" name="etape"/></td>
-			<td width="80"> <input type="text" size="3" name="km" /></td>
-			<td width="80"> 
-				<select size="3" name="situ">
-					<option value="E">Enregistré</option>
-					<option value="V">Validé</option>
-					<option value="R">Remboursé</option>
-				</select></td>
-			</tr>
-	</table>
 	
-	<h2>Hors Forfait</h2>
-	<table border="1">
-		<tr><th>Date</th><th>Libellé </th><th>Montant</th><th>Situation</th></tr>
-		<tr align="center"><td width="100" ><input type="text" size="12" name="hfDate1"/></td>
-			<td width="220"><input type="text" size="30" name="hfLib1"/></td> 
-			<td width="90"> <input type="text" size="10" name="hfMont1"/></td>
-			<td width="80"> 
-				<select size="3" name="hfSitu1">
-					<option value="E">Enregistré</option>
-					<option value="V">Validé</option>
-					<option value="R">Remboursé</option>
-				</select></td>
-			</tr>
-	</table>
-		<?php echo $user ?>
+		
+	
+       
+  	<table class="listeLegere">
+  	   <caption>Eléments forfaitisés </caption>
+        <tr>
+         <?php
+         foreach ( $lesFraisForfait as $unFraisForfait ) 
+		 {
+			$libelle = $unFraisForfait['libelle'];
+		?>	
+			<th> <?php echo $libelle?></th>
+		 <?php
+        }
+		?>
+		</tr>
+        <tr>
+        <?php
+          foreach (  $lesFraisForfait as $unFraisForfait  ) 
+		  {
+				$quantite = $unFraisForfait['quantite'];
+		?>
+                <td class="qteForfait"><?php echo $quantite?> </td>
+		 <?php
+          }
+		?>
+                 <td  style="float:right;">
+                    <select size="3" name="situ" style="float:right">
+                        
+                        <option value="E">Enregistré</option>
+                        <option value="V">Validé</option>
+                        <option value="R">Remboursé</option>
+                        
+                    </select>
+                    
+                </td>
+		</tr>
+      
+        
+        </table>
+    
+    
+    
+    <br/><br/><br/><br/><br/><br/><br/>
+    
+  	<table class="listeLegere">
+  	   <caption>Descriptif des éléments hors forfait</caption>
+           
+           <tr>
+                <th class="date">Date</th>
+                <th class="libelle">Libellé</th>
+                <th class='montant'>Montant</th>                
+             </tr>
+             
+             
+        <?php      
+          foreach ( $lesFraisHorsForfait as $unFraisHorsForfait ) 
+		  {
+			$date = $unFraisHorsForfait['date'];
+			$libelle = $unFraisHorsForfait['libelle'];
+			$montant = $unFraisHorsForfait['montant'];
+		?>
+             <tr>
+                <td><?php echo $date ?></td>
+                <td><?php echo $libelle ?></td>
+                <td><?php echo $montant ?></td>
+                  
+        <?php 
+          }
+		?>
+   
+        <td  style="float:right;">
+                    <select size="3" name="situ" style="float:right">
+                        
+                        <option value="E">Enregistré</option>
+                        <option value="V">Validé</option>
+                        <option value="R">Remboursé</option>
+                        
+                    </select>
+                    
+                </td>
+             </tr>
+        </table>
+    
+        <div class="encadre">
+         <p>
+            <br> Montant validé : <?php echo $montantValide?>
+         </p>
+ 
+		
 	<p class="titre"></p>
 	<div class="titre">Nb Justificatifs</div><input type="text" class="zone" size="4" name="hcMontant"/>		
 	<p class="titre" /><label class="titre">&nbsp;</label><input class="zone"type="reset" /><input class="zone"type="submit" />
+        
+        
+     </div>
 </form>
