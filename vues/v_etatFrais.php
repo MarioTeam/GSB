@@ -40,12 +40,16 @@
                 <th class="libelle">Libellé</th>
                 <th class='montant'>Montant</th>                
              </tr>
-        <?php      
+        <?php 
+        
+        
+        
           foreach ( $lesFraisHorsForfait as $unFraisHorsForfait ) 
 		  {
 			$date = $unFraisHorsForfait['date'];
 			$libelle = $unFraisHorsForfait['libelle'];
 			$montant = $unFraisHorsForfait['montant'];
+                        
 		?>
              <tr>
                 <td><?php echo $date ?></td>
@@ -55,6 +59,7 @@
         <?php 
           }
 		?>
+            
     </table>
     </div>
  

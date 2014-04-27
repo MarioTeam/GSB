@@ -75,6 +75,20 @@ class PdoGsb{
 		//$nom = $rs->fetch();
 		return $rs;
 	}
+        
+        
+        public function getIdEtat($idVisiteur,$mois){
+		$req = "select fichefrais.idEtat as idEtat from fichefrais where fichefrais.idVisiteur='$idVisiteur' and fichefrais.mois='$mois'";
+		$rs = PdoGsb::$monPdo->query($req);
+		$etat = $rs->fetch();
+		return $etat;
+	}
+        
+        
+        public function majIdEtat($idVisiteur,$idEtat,$date){
+		$req = "UPDATE fichefrais set fichefrais.idEtat='$idEtat' where fichefrais.idVisiteur='$idVisiteur' and fichefrais.mois='$date'";
+		PdoGsb::$monPdo->exec($req);
+	}
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
  * concernées par les deux arguments

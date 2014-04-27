@@ -13,22 +13,35 @@ switch($action){
 	}
 	
 	case 'voirFiche':{
-		$user = $_REQUEST['lstVisiteur'];
-		$mois = $_REQUEST['mois'];
-		$annee = $_REQUEST['annee'];
-		$dateValid = $annee . $mois;
-                $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($user,$dateValid);
 		$listeUtilisateur = $pdo->getNomPrenomIdVisiteur();
-                $nbJustificatifs = $pdo->getNbjustificatifs($user,$dateValid);
-                $lesFraisForfait= $pdo->getLesFraisForfait($user,$dateValid);
-		$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($user,$dateValid);
-		$montantValide = $lesInfosFicheFrais['montantValide'];
                 include("vues/v_listeVisiteur.php");
+            
+                $_SESSION['idVisiteur_C'] = $_REQUEST['lstVisiteur'];
+		$_SESSION['mois'] = $_REQUEST['mois'];
+		$_SESSION['annee'] = $_REQUEST['annee'];
+		$dateValid = $_SESSION['annee'] . $_SESSION['mois'];
+                $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idVisiteur_C'],$dateValid);
+		
+        
+                $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idVisiteur_C'],$dateValid);
+		$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idVisiteur_C'],$dateValid);
+		$nbJustificatifs = $pdo->getNbjustificatifs($_SESSION['idVisiteur_C'],$dateValid);
+		
+                $lesEtats = $pdo->getIdEtat($_SESSION['idVisiteur_C'],$dateValid);
+                $montantValide = $lesInfosFicheFrais['montantValide'];
+               
 		include ("vues/v_validFrais.php");
 		break;
 	}
 	
-	
+        case 'validation':{
+            
+                include ("vues/v_redirect.php");
+                
+                $dateValid = $_SESSION['annee'] . $_SESSION['mois'];
+                $situation = $_REQUEST['situ'];
+                $pdo->majIdEtat($_SESSION['idVisiteur_C'],$situation,$dateValid);
+        }
 }
 
 ?>
